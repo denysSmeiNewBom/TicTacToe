@@ -2,8 +2,10 @@
 public class Table {
     public Player[] boardInfo;
     public Player winner;
+    public int move;
 
     Table() {//перша борда/@
+        move = 0;
         this.boardInfo = new Player[9];
         for (int i = 0; i < boardInfo.length; i++) {
             boardInfo[i] = Player.N;
@@ -18,6 +20,7 @@ public class Table {
 
     public Table madeCopyOfTheTable() {//Робить копію себе і записую в ний стіл/@
         Table newTable = new Table();
+        newTable.move = this.move;
         newTable.winner = this.winner;
         for (int i = 0; i < newTable.boardInfo.length; i++) {
             newTable.boardInfo[i] = this.boardInfo[i];
@@ -64,6 +67,7 @@ public class Table {
         for (int i = 0; i < arrOfMoves.length; i++) {
             if (arrOfMoves[i] == move) {
                 boardInfo[move - 1] = player;
+                this.move = move;
             }
         }
         winner = getWinner();
@@ -71,7 +75,7 @@ public class Table {
 
     ///////////////////////////////Вони працюють в парі /@
     private Player getWinnerInTheBoard(Player player) {//Чи є переможець на дошці і хто /@
-        int[][] winnerCombination = {{0, 1, 2}, {3, 4, 5}, {6, 7, 8}, {0, 3, 6}, {1, 4, 7}, {4, 5, 8}, {0, 4, 8}, {2, 4, 6}};
+        int[][] winnerCombination = {{0, 1, 2}, {3, 4, 5}, {6, 7, 8}, {0, 3, 6}, {1, 4, 7}, {2, 5, 8}, {0, 4, 8}, {2, 4, 6}};
         for (int i = 0; i < winnerCombination.length; i++) {
             for (int j = 0; j < 3; j++) {
                 if (boardInfo[winnerCombination[i][j]] != player) break;

@@ -1,13 +1,14 @@
 import java.util.Random;
 import java.util.Scanner;
 
-public class Helper {
+public class Helper {///@
     public static Scanner scanner = new Scanner(System.in);
     public static Random random = new Random();
     public Player computer = Player.N, humane = Player.N;
     protected Table mainTable = new Table();
+    public static int depth = 9;
 
-    private void pregame() {//рандомний вибір гравців перед грою
+    public void pregame() {//рандомний вибір гравців перед грою /@
         if (random.nextBoolean() == true) {
             this.computer = Player.O;
             this.humane = Player.X;
@@ -17,7 +18,7 @@ public class Helper {
         }
     }
 
-    public void game() { //Сама гра
+    public void game() { //Сама гра/@
         pregame();
         if (computer == Player.X) {
             while (mainTable.getArrOfPossibleMoves()[0] != -1) {
@@ -62,8 +63,11 @@ public class Helper {
     }
 
     private void computerMakeMove() {// Хід компа
-        mainTable.getFigurationTable();
-        mainTable.makeMoveOnTheBoard(mainTable.getArrOfPossibleMoves()[random.nextInt(mainTable.getArrOfPossibleMoves().length)], computer);
-        System.out.println("Dome Computer move");
+        PossibleMove possibleMove = new PossibleMove(mainTable,computer);
+        possibleMove.buildTree();
+        AI ai = new AI(computer,humane,possibleMove);
+        mainTable.makeMoveOnTheBoard(ai.engineForMiniMax(), computer);
+        System.out.println("The move of a stupid computer :");
+        depth--;
     }
 }

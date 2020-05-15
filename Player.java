@@ -1,3 +1,3 @@
-public enum Player {
+public enum Player {///@
     X,O,N;
 }

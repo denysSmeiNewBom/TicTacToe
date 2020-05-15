@@ -2,11 +2,24 @@ public class Main {
     public static void main(String[] args) {
 
 
-        Player[] player = {Player.N, Player.N, Player.N, Player.N, Player.N, Player.N, Player.N, Player.N, Player.N};
-        Table table = new Table(player);
-        PossibleMove firstPossibleMove = new PossibleMove(table, Player.X);
-        firstPossibleMove.buildTree();
-        System.out.println();
+
+        Helper helper = new Helper();
+        helper.game();
+
+        ///////////////////////Test MiniMaxi
+
+
+
+        /*int[] arr = {-2,4,6,32,56,-1};
+        ai.getMiniMax(arr);*/
+
+        ///////////////////////Test MiniMaxi
+
+        /*System.out.println(helper.humane);
+        AI ai = new AI(helper.humane, helper.computer,firstPossibleMove);
+        System.out.println(ai.checkoutPossibleMove(ai.treeOfMoves));*/
+
+
         /* Helper /@
         Helper helper = new Helper();
         helper.game();
